@@ -2,9 +2,6 @@ import os
 import discord
 from discord import app_commands
 from discord.ui import Select, View
-from dotenv import load_dotenv
-
-load_dotenv()
 
 class UpdateBot(discord.Client):
     def __init__(self):
@@ -130,7 +127,4 @@ async def status(interaction: discord.Interaction):
 async def on_ready():
     print(f'DoEA Console is online!')
 
-# Start web server and bot
-from keep_alive import keep_alive
-keep_alive()
 bot.run(os.getenv('DISCORD_TOKEN'))
