@@ -12,11 +12,16 @@ def home():
 def health():
     return "OK"
 
+@app.route('/ping')
+def ping():
+    return "pong"
+
 def run():
-    port = int(os.environ.get('PORT', 8000))  # Changed to 8000
-    app.run(host='0.0.0.0', port=port)
+    print("Starting Flask on port 8000...")
+    app.run(host='0.0.0.0', port=8000, debug=False)
 
 def keep_alive():
     t = Thread(target=run)
     t.daemon = True
     t.start()
+    print("Flask thread started")
