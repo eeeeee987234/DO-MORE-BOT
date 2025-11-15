@@ -2,9 +2,10 @@ import os
 import discord
 from discord import app_commands
 from discord.ui import Select, View
+import time
 
-# Get token - try different environment variable names
-token = os.getenv('DISCORD_TOKEN') or os.getenv('TOKEN')
+# Get token
+token = os.getenv('DISCORD_TOKEN')
 
 if not token:
     print("ERROR: No token found!")
@@ -138,8 +139,10 @@ async def status(interaction: discord.Interaction):
 async def on_ready():
     print(f'✅ DoEA Console is online as {bot.user}!')
 
-bot.run(token)
-
+# Start Flask FIRST, then Discord bot
 from keep_alive import keep_alive
 keep_alive()
+print("Flask web server starting...")
+time.sleep(3)  # Give Flask time to start
+print("Starting Discord bot...")
 bot.run(token)
