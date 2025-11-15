@@ -3,6 +3,16 @@ import discord
 from discord import app_commands
 from discord.ui import Select, View
 
+# Get token - try different environment variable names
+token = os.getenv('DISCORD_TOKEN') or os.getenv('TOKEN')
+
+if not token:
+    print("ERROR: No token found!")
+    print("Please set DISCORD_TOKEN environment variable in Koyeb")
+    exit(1)
+
+print(f"Token found, starting bot...")
+
 class UpdateBot(discord.Client):
     def __init__(self):
         intents = discord.Intents.default()
@@ -12,6 +22,7 @@ class UpdateBot(discord.Client):
 
     async def setup_hook(self):
         await self.tree.sync()
+        print("Commands synced!")
 
 bot = UpdateBot()
 
@@ -125,6 +136,6 @@ async def status(interaction: discord.Interaction):
 
 @bot.event
 async def on_ready():
-    print(f'DoEA Console is online!')
+    print(f'✅ DoEA Console is online as {bot.user}!')
 
-bot.run(os.getenv('DISCORD_TOKEN'))
+bot.run(token)
