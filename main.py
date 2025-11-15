@@ -139,3 +139,7 @@ async def on_ready():
     print(f'✅ DoEA Console is online as {bot.user}!')
 
 bot.run(token)
+
+from keep_alive import keep_alive
+keep_alive()
+bot.run(token)
